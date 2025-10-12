@@ -1,0 +1,11 @@
+{
+  "host": "0.0.0.0",
+  "port": 5000,
+  "database": {
+    "host": "postgres",
+    "port": 5432,
+    "database": "demo_db",
+    "user": "postgres",
+    "password": "changeme"
+  }
+}
