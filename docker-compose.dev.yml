@@ -45,7 +45,7 @@ services:
 
   # Services
 
-  auth-node:
+  go-core:
     build: ./go-core
     image: go-core
     container_name: go-core
@@ -54,6 +54,21 @@ services:
       - "50051:50051"
     volumes:
       - ./go-core/config.json:/app/config.json
+    depends_on:
+      - postgres
+      - otel-collector
+    networks:
+      - tps-demo
+
+  py-core:
+    build: ./py-core
+    image: py-core
+    container_name: py-core
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./py-core/config.json:/app/config.json
     depends_on:
       - postgres
     networks:
