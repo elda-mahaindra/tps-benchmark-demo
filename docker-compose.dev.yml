@@ -1,4 +1,6 @@
 services:
+  # Infrastructure services
+
   postgres:
     container_name: postgres
     image: postgres
@@ -11,6 +13,49 @@ services:
     ports:
       - "5432:5432"
     restart: unless-stopped
+    networks:
+      - tps-demo
+
+  jaeger:
+    image: jaegertracing/all-in-one
+    container_name: jaeger
+    environment:
+      - COLLECTOR_ZIPKIN_HOST_PORT=:9411
+    ports:
+      - "16686:16686" # Jaeger UI
+      - "14250:14250" # OTLP gRPC
+      - "9411:9411" # Zipkin
+    networks:
+      - tps-demo
+
+  otel-collector:
+    image: otel/opentelemetry-collector
+    container_name: otel-collector
+    command: ["--config=/etc/otel-collector-config.yaml"]
+    volumes:
+      - ./otel-collector-config.yaml:/etc/otel-collector-config.yaml
+    ports:
+      - "4317:4317" # gRPC OTLP
+      - "4318:4318" # HTTP OTLP
+      - "55679:55679" # zPages (optional)
+    depends_on:
+      - jaeger
+    networks:
+      - tps-demo
+
+  # Services
+
+  auth-node:
+    build: ./go-core
+    image: go-core
+    container_name: go-core
+    restart: unless-stopped
+    ports:
+      - "50051:50051"
+    volumes:
+      - ./go-core/config.json:/app/config.json
+    depends_on:
+      - postgres
     networks:
       - tps-demo
 
