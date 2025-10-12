@@ -13,4 +13,7 @@ dev-up: ## Start development environment in detached mode
 dev-down: ## Stop development environment
 	docker compose -f docker-compose.dev.yml down -v
 
-.PHONY: dev-up dev-down help
+sqlc: ## Generate SQLC code
+	cd go-core/store/postgres_store && sqlc generate
+
+.PHONY: help dev-up dev-down sqlc
