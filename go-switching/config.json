@@ -1,0 +1,21 @@
+{
+  "app": {
+    "name": "go-switching",
+    "host": "0.0.0.0",
+    "env": "standalone",
+    "port": {
+      "grpc": 50052
+    }
+  },
+  "external_service": {
+    "go_core": {
+      "name": "go-core",
+      "host": "go-core",
+      "port": 50051
+    }
+  },
+  "otel_tracer": {
+    "name": "demo-tracer",
+    "endpoint": "otel-collector:4317"
+  }
+}
