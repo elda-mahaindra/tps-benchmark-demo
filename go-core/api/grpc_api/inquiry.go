@@ -51,63 +51,29 @@ func (api *Api) GetAccountByAccountNumber(ctx context.Context, request *pb.GetAc
 		return nil, apperrors.ToGRPCError(err)
 	}
 
-	// Map service result to protobuf response
-	// Convert balance from pgtype.Numeric to string
-	var balanceStr string
-	if result.Account.Balance.Valid {
-		balanceFloat, _ := result.Account.Balance.Float64Value()
-		balanceStr = fmt.Sprintf("%.2f", balanceFloat.Float64)
-	}
-
-	// Handle optional date fields
-	var closedDateStr string
-	if result.Account.ClosedDate.Valid {
-		closedDateStr = result.Account.ClosedDate.Time.Format("2006-01-02")
-	}
-
-	var openedDateStr string
-	if result.Account.OpenedDate.Valid {
-		openedDateStr = result.Account.OpenedDate.Time.Format("2006-01-02")
-	}
-
-	var createdAtStr string
-	if result.Account.CreatedAt.Valid {
-		createdAtStr = result.Account.CreatedAt.Time.Format("2006-01-02T15:04:05Z07:00")
-	}
-
-	var updatedAtStr string
-	if result.Account.UpdatedAt.Valid {
-		updatedAtStr = result.Account.UpdatedAt.Time.Format("2006-01-02T15:04:05Z07:00")
-	}
-
+	// Map domain models to protobuf response
 	response.Account = &pb.AccountInfo{
 		AccountId:     result.Account.AccountID,
 		AccountNumber: result.Account.AccountNumber,
 		CustomerId:    result.Account.CustomerID,
 		AccountType:   result.Account.AccountType,
 		AccountStatus: result.Account.AccountStatus,
-		Balance:       balanceStr,
+		Balance:       result.Account.Balance,
 		Currency:      result.Account.Currency,
-		OpenedDate:    openedDateStr,
-		ClosedDate:    closedDateStr,
-		CreatedAt:     createdAtStr,
-		UpdatedAt:     updatedAtStr,
-	}
-
-	// Handle optional customer text fields
-	var dateOfBirthStr string
-	if result.Account.DateOfBirth.Valid {
-		dateOfBirthStr = result.Account.DateOfBirth.Time.Format("2006-01-02")
+		OpenedDate:    result.Account.OpenedDate,
+		ClosedDate:    result.Account.ClosedDate,
+		CreatedAt:     result.Account.CreatedAt,
+		UpdatedAt:     result.Account.UpdatedAt,
 	}
 
 	response.Customer = &pb.CustomerInfo{
-		CustomerNumber: result.Account.CustomerNumber,
-		FullName:       result.Account.FullName,
-		IdNumber:       result.Account.IDNumber,
-		PhoneNumber:    result.Account.PhoneNumber.String,
-		Email:          result.Account.Email.String,
-		Address:        result.Account.Address.String,
-		DateOfBirth:    dateOfBirthStr,
+		CustomerNumber: result.Customer.CustomerNumber,
+		FullName:       result.Customer.FullName,
+		IdNumber:       result.Customer.IDNumber,
+		PhoneNumber:    result.Customer.PhoneNumber,
+		Email:          result.Customer.Email,
+		Address:        result.Customer.Address,
+		DateOfBirth:    result.Customer.DateOfBirth,
 	}
 
 	// Set span attributes and status
