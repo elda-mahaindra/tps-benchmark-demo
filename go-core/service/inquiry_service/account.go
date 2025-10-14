@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 
-	"go-core/store/postgres_store/sqlc"
 	"go-core/util/logging"
 
 	"github.com/sirupsen/logrus"
@@ -17,7 +16,8 @@ type GetAccountByAccountNumberParams struct {
 }
 
 type GetAccountByAccountNumberResult struct {
-	Account sqlc.GetAccountByAccountNumberRow
+	Account  Account
+	Customer Customer
 }
 
 func (service *Service) GetAccountByAccountNumber(ctx context.Context, params *GetAccountByAccountNumberParams) (*GetAccountByAccountNumberResult, error) {
@@ -45,7 +45,7 @@ func (service *Service) GetAccountByAccountNumber(ctx context.Context, params *G
 	logger.Info()
 
 	// Call store layer to get account with customer details
-	account, err := service.store.postgres.GetAccountByAccountNumber(ctx, params.AccountNumber)
+	row, err := service.store.postgres.GetAccountByAccountNumber(ctx, params.AccountNumber)
 	if err != nil {
 		logger.WithFields(logrus.Fields{
 			"scope": "Get account by account number",
@@ -59,8 +59,30 @@ func (service *Service) GetAccountByAccountNumber(ctx context.Context, params *G
 		return nil, err
 	}
 
-	// Set result
-	result.Account = account
+	// Map sqlc row to domain models
+	result.Account = Account{
+		AccountID:     row.AccountID,
+		AccountNumber: row.AccountNumber,
+		CustomerID:    row.CustomerID,
+		AccountType:   row.AccountType,
+		AccountStatus: row.AccountStatus,
+		Balance:       formatBalance(row.Balance),
+		Currency:      row.Currency,
+		OpenedDate:    formatDate(row.OpenedDate),
+		ClosedDate:    formatDate(row.ClosedDate),
+		CreatedAt:     formatTimestamp(row.CreatedAt),
+		UpdatedAt:     formatTimestamp(row.UpdatedAt),
+	}
+
+	result.Customer = Customer{
+		CustomerNumber: row.CustomerNumber,
+		FullName:       row.FullName,
+		IDNumber:       row.IDNumber,
+		PhoneNumber:    formatText(row.PhoneNumber),
+		Email:          formatText(row.Email),
+		Address:        formatText(row.Address),
+		DateOfBirth:    formatDate(row.DateOfBirth),
+	}
 
 	// Set span attributes and status
 	span.SetAttributes(
