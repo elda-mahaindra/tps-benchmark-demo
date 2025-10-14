@@ -7,10 +7,11 @@ import (
 	"os"
 	"os/signal"
 
-	"go-switching/api/grpc_api"
-	"go-switching/service"
-	"go-switching/util/config"
-	"go-switching/util/tracing"
+	"go-gateway/api/grpc_api"
+	"go-gateway/api/rest_api"
+	"go-gateway/service"
+	"go-gateway/util/config"
+	"go-gateway/util/tracing"
 
 	"github.com/sirupsen/logrus"
 )
@@ -66,7 +67,7 @@ func start() {
 	}).Infof("Starting '%s' service ...", config.App.Name)
 
 	// --- Init service adapter ---
-	goCoreAdapter, err := createGoCoreAdapter(config.ExternalService.GoCore, logger, tracer)
+	goCoreAdapter, err := createGoSwitchingAdapter(config.ExternalService.GoCore, logger, tracer)
 	if err != nil {
 		log.Printf("failed to create go-core adapter: %v", err)
 		os.Exit(1)
@@ -80,6 +81,12 @@ func start() {
 
 	// --- Run servers ---
 	runGrpcServer(config.App.Port.Grpc, grpcApi)
+
+	// --- Init api layer ---
+	restApi := rest_api.NewApi(logger, tracer, service)
+
+	// --- Run servers ---
+	runRestServer(config.App.Port.Rest, restApi)
 
 	// --- Wait for signal ---
 	ch := make(chan os.Signal, 1)

@@ -12,12 +12,13 @@ func bindEnvironmentVariables() {
 	viper.BindEnv("app.host", "APP_HOST")
 	viper.BindEnv("app.env", "APP_ENV")
 	viper.BindEnv("app.port.grpc", "APP_PORT_GRPC")
+	viper.BindEnv("app.port.rest", "APP_PORT_REST")
 
 	// External service config
 
-	viper.BindEnv("external_service.go_core.name", "GO_CORE_NAME")
-	viper.BindEnv("external_service.go_core.host", "GO_CORE_HOST")
-	viper.BindEnv("external_service.go_core.port", "GO_CORE_PORT")
+	viper.BindEnv("external_service.go_switching.name", "GO_SWITCHING_NAME")
+	viper.BindEnv("external_service.go_switching.host", "GO_SWITCHING_HOST")
+	viper.BindEnv("external_service.go_switching.port", "GO_SWITCHING_PORT")
 
 	// Otel tracer config
 

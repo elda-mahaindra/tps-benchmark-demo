@@ -13,12 +13,6 @@ func bindEnvironmentVariables() {
 	viper.BindEnv("app.env", "APP_ENV")
 	viper.BindEnv("app.port.grpc", "APP_PORT_GRPC")
 
-	// Token config
-
-	viper.BindEnv("token.symmetric_key", "TOKEN_SYMMETRIC_KEY")
-	viper.BindEnv("token.duration.access", "TOKEN_DURATION_ACCESS")
-	viper.BindEnv("token.duration.refresh", "TOKEN_DURATION_REFRESH")
-
 	// Store config
 
 	viper.BindEnv("store.postgres.connection_string", "POSTGRES_CONNECTION_STRING")

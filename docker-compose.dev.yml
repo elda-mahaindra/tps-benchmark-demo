@@ -76,6 +76,24 @@ services:
     networks:
       - tps-demo
 
+  go-gateway:
+    build: ./go-gateway
+    image: go-gateway
+    container_name: go-gateway
+    restart: unless-stopped
+    ports:
+      - "50053:50053"
+      - "4000:4000"
+    volumes:
+      - ./go-gateway/config.json:/app/config.json
+    depends_on:
+      - postgres
+      - otel-collector
+      - go-core
+      - go-switching
+    networks:
+      - tps-demo
+
   py-core:
     build: ./py-core
     image: py-core
