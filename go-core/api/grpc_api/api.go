@@ -1,7 +1,7 @@
 package grpc_api
 
 import (
-	"go-core/api/grpc_api/pb"
+	pb "go-core/api/grpc_api/pb"
 	"go-core/service/inquiry_service"
 
 	"github.com/sirupsen/logrus"

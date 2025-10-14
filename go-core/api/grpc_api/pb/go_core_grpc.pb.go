@@ -4,7 +4,7 @@
 // - protoc             v6.32.1
 // source: go_core.proto
 
-package pb
+package go_core_pb
 
 import (
 	context "context"
@@ -19,7 +19,7 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	GoCore_GetAccountByAccountNumber_FullMethodName = "/pb.GoCore/GetAccountByAccountNumber"
+	GoCore_GetAccountByAccountNumber_FullMethodName = "/go_core_pb.GoCore/GetAccountByAccountNumber"
 )
 
 // GoCoreClient is the client API for GoCore service.
@@ -112,7 +112,7 @@ func _GoCore_GetAccountByAccountNumber_Handler(srv interface{}, ctx context.Cont
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var GoCore_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "pb.GoCore",
+	ServiceName: "go_core_pb.GoCore",
 	HandlerType: (*GoCoreServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

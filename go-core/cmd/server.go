@@ -7,7 +7,7 @@ import (
 	"os"
 
 	"go-core/api/grpc_api"
-	"go-core/api/grpc_api/pb"
+	pb "go-core/api/grpc_api/pb"
 
 	"go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc"
 	"go.opentelemetry.io/otel/propagation"
