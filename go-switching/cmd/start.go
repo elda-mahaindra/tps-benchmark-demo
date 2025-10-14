@@ -65,7 +65,7 @@ func start() {
 		"config": fmt.Sprintf("%+v", config),
 	}).Infof("Starting '%s' service ...", config.App.Name)
 
-	// --- Init service-b adapter ---
+	// --- Init service adapter ---
 	goCoreAdapter, err := createGoCoreAdapter(config.ExternalService.GoCore, logger, tracer)
 	if err != nil {
 		log.Printf("failed to create go-core adapter: %v", err)

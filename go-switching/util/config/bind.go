@@ -13,20 +13,11 @@ func bindEnvironmentVariables() {
 	viper.BindEnv("app.env", "APP_ENV")
 	viper.BindEnv("app.port.grpc", "APP_PORT_GRPC")
 
-	// Token config
+	// External service config
 
-	viper.BindEnv("token.symmetric_key", "TOKEN_SYMMETRIC_KEY")
-	viper.BindEnv("token.duration.access", "TOKEN_DURATION_ACCESS")
-	viper.BindEnv("token.duration.refresh", "TOKEN_DURATION_REFRESH")
-
-	// Store config
-
-	viper.BindEnv("store.postgres.connection_string", "POSTGRES_CONNECTION_STRING")
-	viper.BindEnv("store.postgres.pool.max_conns", "POSTGRES_MAX_CONNS")
-	viper.BindEnv("store.postgres.pool.min_conns", "POSTGRES_MIN_CONNS")
-	viper.BindEnv("store.postgres.pool.retry_max_attempts", "POSTGRES_POOL_RETRY_MAX_ATTEMPTS")
-	viper.BindEnv("store.postgres.pool.retry_base_delay", "POSTGRES_POOL_RETRY_BASE_DELAY")
-	viper.BindEnv("store.postgres.pool.retry_max_delay", "POSTGRES_POOL_RETRY_MAX_DELAY")
+	viper.BindEnv("external_service.go_core.name", "GO_CORE_NAME")
+	viper.BindEnv("external_service.go_core.host", "GO_CORE_HOST")
+	viper.BindEnv("external_service.go_core.port", "GO_CORE_PORT")
 
 	// Otel tracer config
 
