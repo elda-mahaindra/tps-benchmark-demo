@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"go-core/api/grpc_api/pb"
+	pb "go-core/api/grpc_api/pb"
 	"go-core/service/inquiry_service"
 	apperrors "go-core/util/errors"
 	"go-core/util/logging"

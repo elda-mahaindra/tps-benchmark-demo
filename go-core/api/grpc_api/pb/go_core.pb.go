@@ -4,7 +4,7 @@
 // 	protoc        v6.32.1
 // source: go_core.proto
 
-package pb
+package go_core_pb
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -338,12 +338,13 @@ var File_go_core_proto protoreflect.FileDescriptor
 
 const file_go_core_proto_rawDesc = "" +
 	"\n" +
-	"\rgo_core.proto\x12\x02pb\"I\n" +
+	"\rgo_core.proto\x12\n" +
+	"go_core_pb\"I\n" +
 	" GetAccountByAccountNumberRequest\x12%\n" +
-	"\x0eaccount_number\x18\x01 \x01(\tR\raccountNumber\"|\n" +
-	"!GetAccountByAccountNumberResponse\x12)\n" +
-	"\aaccount\x18\x01 \x01(\v2\x0f.pb.AccountInfoR\aaccount\x12,\n" +
-	"\bcustomer\x18\x02 \x01(\v2\x10.pb.CustomerInfoR\bcustomer\"\xf4\x02\n" +
+	"\x0eaccount_number\x18\x01 \x01(\tR\raccountNumber\"\x8c\x01\n" +
+	"!GetAccountByAccountNumberResponse\x121\n" +
+	"\aaccount\x18\x01 \x01(\v2\x17.go_core_pb.AccountInfoR\aaccount\x124\n" +
+	"\bcustomer\x18\x02 \x01(\v2\x18.go_core_pb.CustomerInfoR\bcustomer\"\xf4\x02\n" +
 	"\vAccountInfo\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\x03R\taccountId\x12%\n" +
@@ -370,9 +371,9 @@ const file_go_core_proto_rawDesc = "" +
 	"\fphone_number\x18\x04 \x01(\tR\vphoneNumber\x12\x14\n" +
 	"\x05email\x18\x05 \x01(\tR\x05email\x12\x18\n" +
 	"\aaddress\x18\x06 \x01(\tR\aaddress\x12\"\n" +
-	"\rdate_of_birth\x18\a \x01(\tR\vdateOfBirth2r\n" +
-	"\x06GoCore\x12h\n" +
-	"\x19GetAccountByAccountNumber\x12$.pb.GetAccountByAccountNumberRequest\x1a%.pb.GetAccountByAccountNumberResponseB\x06Z\x04./pbb\x06proto3"
+	"\rdate_of_birth\x18\a \x01(\tR\vdateOfBirth2\x82\x01\n" +
+	"\x06GoCore\x12x\n" +
+	"\x19GetAccountByAccountNumber\x12,.go_core_pb.GetAccountByAccountNumberRequest\x1a-.go_core_pb.GetAccountByAccountNumberResponseB\x11Z\x0f./pb;go_core_pbb\x06proto3"
 
 var (
 	file_go_core_proto_rawDescOnce sync.Once
@@ -388,16 +389,16 @@ func file_go_core_proto_rawDescGZIP() []byte {
 
 var file_go_core_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_go_core_proto_goTypes = []any{
-	(*GetAccountByAccountNumberRequest)(nil),  // 0: pb.GetAccountByAccountNumberRequest
-	(*GetAccountByAccountNumberResponse)(nil), // 1: pb.GetAccountByAccountNumberResponse
-	(*AccountInfo)(nil),                       // 2: pb.AccountInfo
-	(*CustomerInfo)(nil),                      // 3: pb.CustomerInfo
+	(*GetAccountByAccountNumberRequest)(nil),  // 0: go_core_pb.GetAccountByAccountNumberRequest
+	(*GetAccountByAccountNumberResponse)(nil), // 1: go_core_pb.GetAccountByAccountNumberResponse
+	(*AccountInfo)(nil),                       // 2: go_core_pb.AccountInfo
+	(*CustomerInfo)(nil),                      // 3: go_core_pb.CustomerInfo
 }
 var file_go_core_proto_depIdxs = []int32{
-	2, // 0: pb.GetAccountByAccountNumberResponse.account:type_name -> pb.AccountInfo
-	3, // 1: pb.GetAccountByAccountNumberResponse.customer:type_name -> pb.CustomerInfo
-	0, // 2: pb.GoCore.GetAccountByAccountNumber:input_type -> pb.GetAccountByAccountNumberRequest
-	1, // 3: pb.GoCore.GetAccountByAccountNumber:output_type -> pb.GetAccountByAccountNumberResponse
+	2, // 0: go_core_pb.GetAccountByAccountNumberResponse.account:type_name -> go_core_pb.AccountInfo
+	3, // 1: go_core_pb.GetAccountByAccountNumberResponse.customer:type_name -> go_core_pb.CustomerInfo
+	0, // 2: go_core_pb.GoCore.GetAccountByAccountNumber:input_type -> go_core_pb.GetAccountByAccountNumberRequest
+	1, // 3: go_core_pb.GoCore.GetAccountByAccountNumber:output_type -> go_core_pb.GetAccountByAccountNumberResponse
 	3, // [3:4] is the sub-list for method output_type
 	2, // [2:3] is the sub-list for method input_type
 	2, // [2:2] is the sub-list for extension type_name
