@@ -25,7 +25,7 @@ func NewAdapter(
 	tracer trace.Tracer,
 	cc *grpc.ClientConn,
 ) *Adapter {
-	serviceBClient := pb.NewGoCoreClient(cc)
+	goCoreClient := pb.NewGoCoreClient(cc)
 
 	return &Adapter{
 		serviceName: serviceName,
@@ -33,6 +33,6 @@ func NewAdapter(
 		logger: logger,
 		tracer: tracer,
 
-		goCoreClient: serviceBClient,
+		goCoreClient: goCoreClient,
 	}
 }

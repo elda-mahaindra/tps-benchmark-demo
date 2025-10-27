@@ -25,7 +25,7 @@ COPY . .
 RUN chmod +x app_tcp.py
 
 # Expose TCP port
-EXPOSE 5001
+EXPOSE 5002
 
 # Run the TCP application
 CMD ["python", "app_tcp.py"]

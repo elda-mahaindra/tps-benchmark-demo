@@ -1,6 +1,6 @@
 {
-  "host": "0.0.0.0",
-  "port": 5000,
+  "tcp_host": "0.0.0.0",
+  "tcp_port": 5001,
   "database": {
     "host": "postgres",
     "port": 5432,

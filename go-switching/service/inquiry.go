@@ -24,7 +24,7 @@ type GetAccountByAccountNumberResult struct {
 func (service *Service) GetAccountByAccountNumber(ctx context.Context, params *GetAccountByAccountNumberParams) (*GetAccountByAccountNumberResult, error) {
 	const op = "service.Service.GetAccountByAccountNumberParams"
 
-		// Start span
+	// Start span
 	ctx, span := service.tracer.Start(ctx, op)
 	defer span.End()
 

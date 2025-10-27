@@ -23,11 +23,11 @@ type GetAccountByAccountNumberResult struct {
 	Customer Customer
 }
 
-func (client *Adapter) GetAccountByAccountNumber(ctx context.Context, params *GetAccountByAccountNumberParams) (*GetAccountByAccountNumberResult, error) {
-	const op = "go_core_adapter.Adapter.GetAccountByAccountNumber"
+func (adapter *Adapter) GetAccountByAccountNumber(ctx context.Context, params *GetAccountByAccountNumberParams) (*GetAccountByAccountNumberResult, error) {
+	const op = "go_switching_adapter.Adapter.GetAccountByAccountNumber"
 
 	// Start span
-	ctx, span := client.tracer.Start(ctx, op)
+	ctx, span := adapter.tracer.Start(ctx, op)
 	defer span.End()
 
 	span.SetAttributes(
@@ -39,7 +39,7 @@ func (client *Adapter) GetAccountByAccountNumber(ctx context.Context, params *Ge
 	result := &GetAccountByAccountNumberResult{}
 
 	// Get logger with trace id
-	logger := logging.LogWithTrace(ctx, client.logger)
+	logger := logging.LogWithTrace(ctx, adapter.logger)
 	logger = logger.WithFields(logrus.Fields{
 		"[op]":   op,
 		"params": fmt.Sprintf("%+v", params),
@@ -52,7 +52,7 @@ func (client *Adapter) GetAccountByAccountNumber(ctx context.Context, params *Ge
 	}
 
 	// Call external service
-	response, err := client.goSwitchingClient.GetAccountByAccountNumber(ctx, request)
+	response, err := adapter.goSwitchingClient.GetAccountByAccountNumber(ctx, request)
 	if err != nil {
 		logger.WithFields(logrus.Fields{
 			"scope": "Get account by account number",
