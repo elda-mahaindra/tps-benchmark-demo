@@ -13,7 +13,35 @@ dev-up: ## Start development environment in detached mode
 dev-down: ## Stop development environment
 	docker compose -f docker-compose.dev.yml down -v
 
+dev-logs: ## Show logs from all services
+	docker compose -f docker-compose.dev.yml logs -f
+
+dev-status: ## Show status of all services
+	docker compose -f docker-compose.dev.yml ps
+
+dev-restart: ## Restart development environment
+	docker compose -f docker-compose.dev.yml restart
+
+# Testing commands
+
+test-python: ## Test Python stack (py-gateway)
+	@echo "Testing Python stack..."
+	curl -X POST "http://localhost:4001/test/load/burst" \
+		-H "Content-Type: application/json" \
+		-d '{"service_name": "py-gateway", "protocol": "bl2", "total_reqs": 1, "payload": {"account_number": "1001000000001"}}'
+
+test-go: ## Test Go stack (go-gateway)
+	@echo "Testing Go stack..."
+	curl -X POST "http://localhost:4001/test/load/burst" \
+		-H "Content-Type: application/json" \
+		-d '{"service_name": "go-gateway", "protocol": "grpc", "total_reqs": 1, "payload": {"account_number": "1001000000001"}}'
+
+# Development tools
+
 sqlc: ## Generate SQLC code
 	cd go-core/store/postgres_store && sqlc generate
 
-.PHONY: help dev-up dev-down sqlc
+build: ## Build all Docker images
+	docker compose -f docker-compose.dev.yml build
+
+.PHONY: help dev-up dev-down dev-logs dev-status dev-restart test-python test-go sqlc build
