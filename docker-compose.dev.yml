@@ -100,7 +100,7 @@ services:
     container_name: py-core
     restart: unless-stopped
     ports:
-      - "5000:5000"
+      - "5001:5001" # TCP (persistent connections)
     volumes:
       - ./py-core/config.json:/app/config.json
     depends_on:

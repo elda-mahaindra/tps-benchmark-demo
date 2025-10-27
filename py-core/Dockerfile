@@ -21,11 +21,11 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy application code
 COPY . .
 
-# Make app.py executable
-RUN chmod +x app.py
+# Make scripts executable
+RUN chmod +x app_tcp.py
 
-# Expose port
-EXPOSE 5000
+# Expose TCP port
+EXPOSE 5001
 
-# Run the application
-CMD ["python", "app.py"]
+# Run the TCP application
+CMD ["python", "app_tcp.py"]
