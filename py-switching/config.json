@@ -1,0 +1,11 @@
+{
+  "tcp_host": "0.0.0.0",
+  "tcp_port": 5002,
+  "external_service": {
+    "py_core": {
+      "name": "py-core",
+      "host": "py-core",
+      "port": 5001
+    }
+  }
+}

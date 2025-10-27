@@ -1,0 +1,4 @@
+# Python 2.7 Dependencies
+# Note: Python 2.7 reached end of life in 2020
+
+psycopg2-binary==2.8.6
