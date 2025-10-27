@@ -1,0 +1,25 @@
+{
+  "app": {
+    "name": "load-tester",
+    "host": "0.0.0.0",
+    "port": {
+      "rest": 4001
+    }
+  },
+  "external_service": {
+    "go_gateway": {
+      "name": "go-gateway",
+      "host": "go-gateway",
+      "port": 50053
+    },
+    "py_gateway": {
+      "name": "py-gateway",
+      "host": "py-gateway",
+      "port": 8084
+    }
+  },
+  "otel_tracer": {
+    "name": "demo-tracer",
+    "endpoint": "otel-collector:4317"
+  }
+}

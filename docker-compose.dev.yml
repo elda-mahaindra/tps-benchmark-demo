@@ -3,7 +3,7 @@ services:
 
   postgres:
     container_name: postgres
-    image: postgres
+    image: postgres:15
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=changeme
@@ -134,6 +134,22 @@ services:
       - ./py-core/config.json:/app/config.json
     depends_on:
       - postgres
+    networks:
+      - tps-demo
+
+  load-tester:
+    build: ./load-tester
+    image: load-tester
+    container_name: load-tester
+    restart: unless-stopped
+    ports:
+      - "4001:4001"
+    volumes:
+      - ./load-tester/config.json:/app/config.json
+    depends_on:
+      - otel-collector
+      - go-gateway
+      - py-core
     networks:
       - tps-demo
 
