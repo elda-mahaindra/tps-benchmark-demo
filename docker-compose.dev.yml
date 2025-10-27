@@ -137,6 +137,22 @@ services:
     networks:
       - tps-demo
 
+  load-tester:
+    build: ./load-tester
+    image: load-tester
+    container_name: load-tester
+    restart: unless-stopped
+    ports:
+      - "4001:4001"
+    volumes:
+      - ./load-tester/config.json:/app/config.json
+    depends_on:
+      - otel-collector
+      - go-gateway
+      - py-core
+    networks:
+      - tps-demo
+
 networks:
   tps-demo:
     driver: bridge
