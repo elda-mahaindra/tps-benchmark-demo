@@ -94,6 +94,21 @@ services:
     networks:
       - tps-demo
 
+  py-gateway:
+    build: ./py-gateway
+    image: py-gateway
+    container_name: py-gateway
+    restart: unless-stopped
+    ports:
+      - "8083:8083" # REST API
+      - "8084:8084" # TCP
+    volumes:
+      - ./py-gateway/config.json:/app/config.json
+    depends_on:
+      - py-switching
+    networks:
+      - tps-demo
+
   py-switching:
     build: ./py-switching
     image: py-switching
